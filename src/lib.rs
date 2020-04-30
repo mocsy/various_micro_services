@@ -1,5 +1,11 @@
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
+#[derive(Debug, Deserialize)]
+pub struct ListOptions {
+    pub offset: Option<u64>,
+    pub limit: Option<u64>,
+}
+
 #[derive(Serialize, Deserialize, Debug)]
 pub enum TodoStatus {
     New,

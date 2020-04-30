@@ -26,3 +26,7 @@ router = "0.6.0"
 # warp dependencies
 tokio = { version = "0.2", features = ["macros"] }
 warp = "0.2"
+
+# tower-web dependencies
+tower-web = "0.3.7"
+shrinkwraprs = "0.3.0"

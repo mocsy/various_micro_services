@@ -1,5 +1,3 @@
-use serde::Deserialize;
-
 #[tokio::main]
 async fn main() {
     let routes = filters::todo();
@@ -8,9 +6,8 @@ async fn main() {
 }
 
 mod handlers {
-    use super::ListOptions;
     use std::convert::Infallible;
-    use various_micro_services::{Create, Delete, Fetch, List, Replace, Todo, Update};
+    use various_micro_services::{Create, Delete, Fetch, List, ListOptions, Replace, Todo, Update};
 
     pub async fn todo_list(opts: ListOptions) -> Result<impl warp::Reply, Infallible> {
         match Todo::list(opts.limit.unwrap_or_else(|| 100u64)) {
@@ -57,16 +54,9 @@ mod handlers {
     }
 }
 
-#[derive(Debug, Deserialize)]
-pub struct ListOptions {
-    pub offset: Option<u64>,
-    pub limit: Option<u64>,
-}
-
 mod filters {
     use super::handlers;
-    use super::ListOptions;
-    use various_micro_services::Todo;
+    use various_micro_services::{ListOptions, Todo};
     use warp::Filter;
 
     /// The 6 Todo api filters combined.
