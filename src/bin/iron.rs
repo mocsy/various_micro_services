@@ -9,12 +9,12 @@ use various_micro_services::{Create, Delete, Fetch, List, Replace, Todo, Update}
 fn main() {
     let mut router = Router::new();
 
-    router.get("todo/add", todo_add, "todo_add");
+    router.post("todo/add", todo_add, "todo_add");
     router.get("todo/list", todo_list, "todo_list");
     router.get("todo/fetch/:todo_key", todo_fetch, "todo_fetch");
-    router.get("todo/edit", todo_edit, "todo_edit");
-    router.get("todo/replace", todo_replace, "todo_replace");
-    router.get("todo/delete/:todo_key", todo_delete, "todo_delete");
+    router.patch("todo/edit", todo_edit, "todo_edit");
+    router.put("todo/replace", todo_replace, "todo_replace");
+    router.delete("todo/delete/:todo_key", todo_delete, "todo_delete");
 
     let _res = Iron::new(router).http("localhost:3000");
 }
